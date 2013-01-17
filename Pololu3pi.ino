@@ -81,7 +81,7 @@ void display_readings(const unsigned int *calibrated_values)
     // graph.  Using the space, an extra copy of the one-bar
     // character, and character 255 (a full black box), we get 10
     // characters in the array.
-    const char display_characters[10] = { 
+    const char display_characters[10] = {
       ' ', 0, 0, 1, 2, 3, 4, 5, 6, 255             };
 
     // The variable c will have values from 0 to 9, since
@@ -177,7 +177,7 @@ void initialize3pi()
 
   OrangutanLCD::clear();
 
-  OrangutanLCD::print("Go!");		
+  OrangutanLCD::print("Go!");
 
   // Play music and wait for it to finish before we start driving.
   OrangutanBuzzer::playFromProgramSpace(HellOfAnEngineer);

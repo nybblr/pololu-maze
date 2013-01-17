@@ -2,7 +2,7 @@
 // Frank Dellaert, Jan 2013
 // These are all the functions available both in simulator and on 3pi robot
 
-// Stuff to make FSM cross-compile between Arduino and Processing 
+// Stuff to make FSM cross-compile between Arduino and Processing
 #define final const
 
 // return the position of the line with respect to the robot:
@@ -25,7 +25,7 @@ final int INTERSECTION = 1; // Found an intersection, can also be used for goal 
 final int STRAIGHT = 2; // Just a straight line.
 final int UNKNOWN = 3; // Just a straight line.
 
-// Helper routine to examine line 
+// Helper routine to examine line
 int lineType() {
   robot.readLine(sensors, IR_EMITTERS_ON);
   // We use the inner three sensors (1, 2, and 3) for
@@ -37,7 +37,7 @@ int lineType() {
     return DEAD_END;
   else if (sensors[1] > 200 || sensors[2] > 200 || sensors[3] > 200)
     return STRAIGHT;
-  else 
+  else
     return UNKNOWN;
 }
 
@@ -186,10 +186,10 @@ void addTurn(char turn) {
               break;
           }
       }
-   
+
       // Get the angle as a number between 0 and 360 degrees.
       total_angle = total_angle % 360;
-   
+
       // Replace all of those turns with a single one.
       switch(total_angle)
       {
@@ -206,7 +206,7 @@ void addTurn(char turn) {
           path_[pathLength_ - 3] = 'L';
           break;
       }
-  
+
       // The path is now two steps shorter.
       pathLength_ -= 2;
   }

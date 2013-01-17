@@ -1,5 +1,5 @@
 //================================================================================================
-// define states here, do not repeat characters 
+// define states here, do not repeat characters
 //================================================================================================
 
 final char START = 'S'; // always needs to be defined !
@@ -22,20 +22,20 @@ void checkTriggers(int elapsed) {
 
   switch(state_) {
 
-  case START:  
+  case START:
     // get out of start circle
     if (elapsed>400) switchToState(FOLLOW);
     break;
 
   case FOLLOW:
     // allo some time to get back on the line
-    if (elapsed>50) {    
+    if (elapsed>50) {
       if (lineType()==INTERSECTION) switchToState(ENTER);
       if (lineType()==DEAD_END) switchToState(U_TURN);
     }
     break;
 
-  case ENTER:  
+  case ENTER:
     // Drive straight a bit.
     // after we're GOAL, decide which way to turn
     if (elapsed>200) {
@@ -63,23 +63,23 @@ void checkTriggers(int elapsed) {
     }
     break;
 
-  case TURN_LEFT:  
+  case TURN_LEFT:
     if (elapsed>180) switchToState(FOLLOW);
     break;
 
-  case TURN_RIGHT:  
+  case TURN_RIGHT:
     if (elapsed>180) switchToState(FOLLOW);
     break;
-    
+
   case GO_STRAIGHT:
     if (elapsed > 50) switchToState(FOLLOW);
     break;
-    
+
   case U_TURN:
     if (elapsed > 360) switchToState(FOLLOW);
-    break; 
+    break;
 
-  case GOAL:  
+  case GOAL:
     // Wait for button-press, then restart everything
     waitForButtonPress();
     current=0;
@@ -93,15 +93,15 @@ void checkTriggers(int elapsed) {
 //================================================================================================
 void executeBehavior(int elapsed) {
   switch(state_) {
-  case START:  
+  case START:
     setSpeeds(60, 60);
     break;
 
-  case FOLLOW:  
+  case FOLLOW:
     followPID(switched_);
     break;
 
-  case ENTER:  
+  case ENTER:
     // Note that we are slowing down - this prevents the robot
     // from tipping forward too much.
     if (switched_==1) {
@@ -110,36 +110,36 @@ void executeBehavior(int elapsed) {
     }
     break;
 
-  case TURN_LEFT:  
+  case TURN_LEFT:
     if (switched_==1) {
       setSpeeds(-80, 80);
       addTurn('L');
     }
     break;
 
-  case TURN_RIGHT:  
+  case TURN_RIGHT:
     if (switched_==1){
       setSpeeds(80, -80);
       addTurn('R');
     }
     break;
-    
-  case GO_STRAIGHT:  
+
+  case GO_STRAIGHT:
     if (switched_==1){
       setSpeeds(60, 60);
       addTurn('S');
     }
     break;
-  
-  case U_TURN:  
+
+  case U_TURN:
     if (switched_==1){
       setSpeeds(80, -80);
       addTurn('B');
     }
     break;
-    
-  case GOAL:  
-    if (switched_==1){ 
+
+  case GOAL:
+    if (switched_==1){
       setSpeeds(0, 0);
       addTurn('G');
     }

@@ -17,7 +17,7 @@ void switchToState(char state) {
   switched_ = 1;
   printState(state_);
   // uncomment this to debug on Pololu
-  waitForButtonPress();
+  // waitForButtonPress();
   timer_ = millis();
 }
 

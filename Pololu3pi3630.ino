@@ -160,6 +160,7 @@ void addTurn(char turn) {
   // Displays the current path_ on the LCD, using two rows if necessary.
   void displayPath()
   {
+    OrangutanLCD::clear();
     for (int i=0;i<pathLength_;i++)OrangutanLCD::print(path_[i]);
     OrangutanLCD::print("\n");
   }

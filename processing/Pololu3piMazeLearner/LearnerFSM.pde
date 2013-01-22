@@ -23,12 +23,12 @@ void checkTriggers(int elapsed) {
 
   case START:  
     // get out of start circle
-    if (elapsed>400) switchToState(FOLLOW);
+    if (elapsed>450*speedFactor_) switchToState(FOLLOW);
     break;
 
   case FOLLOW:
     // allo some time to get back on the line
-    if (elapsed>50) {    
+    if (elapsed>50*speedFactor_) {    
       if (lineType()==INTERSECTION) switchToState(ENTER);
       if (lineType()==DEAD_END) switchToState(U_TURN);
     }
@@ -37,7 +37,7 @@ void checkTriggers(int elapsed) {
   case ENTER:  
     // Drive straight a bit.
     // after we're GOAL, decide which way to turn
-    if (elapsed>200) {
+    if (elapsed>200*speedFactor_) {
       if (foundGoal() == 1) {
         switchToState(GOAL);
         break;
@@ -63,19 +63,19 @@ void checkTriggers(int elapsed) {
     break;
 
   case TURN_LEFT:  
-    if (elapsed>180) switchToState(FOLLOW);
+    if (elapsed>180*speedFactor_) switchToState(FOLLOW);
     break;
 
   case TURN_RIGHT:  
-    if (elapsed>180) switchToState(FOLLOW);
+    if (elapsed>180*speedFactor_) switchToState(FOLLOW);
     break;
     
   case GO_STRAIGHT:
-    if (elapsed > 50) switchToState(FOLLOW);
+    if (elapsed > 50*speedFactor_) switchToState(FOLLOW);
     break;
     
   case U_TURN:
-    if (elapsed > 360) switchToState(FOLLOW);
+    if (elapsed > 360*speedFactor_) switchToState(FOLLOW);
     break; 
 
   case GOAL:  
@@ -93,7 +93,7 @@ void checkTriggers(int elapsed) {
 void executeBehavior(int elapsed) {
   switch(state_) {
   case START:  
-    setSpeeds(60, 60);
+    setSpeeds(60/speedFactor_, 60/speedFactor_);
     break;
 
   case FOLLOW:  
@@ -104,35 +104,35 @@ void executeBehavior(int elapsed) {
     // Note that we are slowing down - this prevents the robot
     // from tipping forward too much.
     if (switched_==1) {
-      setSpeeds(50, 50);
+      setSpeeds(50/speedFactor_, 50/speedFactor_);
       intersection_type = intersectionType();
     }
     break;
 
   case TURN_LEFT:  
     if (switched_==1) {
-      setSpeeds(-80, 80);
+      setSpeeds(-80/speedFactor_, 80/speedFactor_);
       addTurn('L');
     }
     break;
 
   case TURN_RIGHT:  
     if (switched_==1){
-      setSpeeds(80, -80);
+      setSpeeds(80/speedFactor_, -80/speedFactor_);
       addTurn('R');
     }
     break;
     
   case GO_STRAIGHT:  
     if (switched_==1){
-      setSpeeds(60, 60);
+      setSpeeds(60/speedFactor_, 60/speedFactor_);
       addTurn('S');
     }
     break;
   
   case U_TURN:  
     if (switched_==1){
-      setSpeeds(80, -80);
+      setSpeeds(80/speedFactor_, -80/speedFactor_);
       addTurn('B');
     }
     break;

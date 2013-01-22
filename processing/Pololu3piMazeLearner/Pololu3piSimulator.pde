@@ -19,7 +19,7 @@ void initialize3piSimulator () {
   // run unit tests first
   tests.run();
 
-  maze_ = loadImage("maze2.png");
+  maze_ = loadImage("maze5.png");
   maze_.filter(BLUR, 1);
 }
 

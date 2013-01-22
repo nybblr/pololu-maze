@@ -82,11 +82,10 @@ final int FOUND_NONE = 0;
 int intersectionType() {
   int[] sensors = readSensors();
   // Check for left and right exits.
-  println("sensor 0: " + sensors[0] + "\tsensor 1: " + sensors[1] + "\tsensor 2: " + sensors[2] + "\tsensor 3: " + sensors[3] + "\tsensor 4: " + sensors[4]);
-  if (sensors[0] > 200) {
+  if (sensors[0] > 100) {
     return FOUND_LEFT;
   }
-  else if (sensors[4] > 200){
+  else if (sensors[4] > 100){
     return FOUND_RIGHT;
   }
   else {
@@ -156,7 +155,7 @@ void followPID(int switched)
     power_difference = -maximum;
 
   // original Pololu code:
-  setSpeeds((maximum + power_difference/2), (maximum - power_difference/2));
+  setSpeeds((maximum + power_difference/2)/speedFactor_, (maximum - power_difference/2)/speedFactor_);
 }
 
 //================================================================================================

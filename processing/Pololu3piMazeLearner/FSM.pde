@@ -1,4 +1,4 @@
-// Finite State Machine
+// Finit State Machine 
 char state_; // current state
 int timer_; // when we last switched
 int switched_; // did we just switch?
@@ -17,21 +17,21 @@ void switchToState(char state) {
   switched_ = 1;
   printState(state_);
   // uncomment this to debug on Pololu
-  // waitForButtonPress();
+  //waitForButtonPress();
   timer_ = millis();
 }
 
 // do one time-step
 void step() {
-  int elapsed = millis()-timer_; // always include this
+  int elapsed = millis()-timer_; // always include this 
 
   // state machine needs to define the two functions below !
 
-  // Check for triggers that change state
+  // Check for triggers that change state 
   checkTriggers(elapsed);
 
   if (switched_==1) {
-    elapsed = millis()-timer_; // if we did change state, reset elapsed
+    elapsed = millis()-timer_; // if we did change state, reset elapsed 
   }
 
   // now execute current behavior
